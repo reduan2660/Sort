@@ -45,7 +45,7 @@ body {
   margin: auto;
   height: 65px;
   width: 65px;
-  background-image: url("/image/me.jpg");
+  background-image: url("image/me.jpg");
   background-size: cover;
   border-radius: 50%;
 }

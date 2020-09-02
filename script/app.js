@@ -22,7 +22,7 @@ let flag = false;
 
 // Chart
 let chart = new Chart(ctx, {
-  type: "bar",
+  type: "pie",
 
   data: {
     labels: Labels,
