@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+$bg-color: #212529;
+$sideBar: #272b2f;
+$redColor: #fd413c;
+$yellowColor: #febc2c;
+$cardColor: #3b4045;
+
+@import "body";
+@import "leftSide";
+@import "rightSide";

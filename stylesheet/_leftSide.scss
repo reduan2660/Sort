@@ -1,0 +1,100 @@
+#left-side {
+  background-color: $sideBar;
+
+  position: fixed;
+  right: 0;
+
+  height: 100vh;
+  width: 25vw;
+}
+
+#intro {
+  min-height: 20vh;
+  border-bottom: 4px solid rgba(196, 196, 196, 0.3);
+
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  p {
+    color: whitesmoke;
+    font-size: 2rem;
+    text-align: right;
+    font-family: "Roboto", sans-serif;
+    margin: auto 5px;
+  }
+  #me-container {
+    margin: auto;
+    height: 65px;
+    width: 65px;
+
+    background-image: url("/image/me.jpg");
+    background-size: cover;
+
+    border-radius: 50%;
+  }
+}
+
+#start {
+  cursor: pointer;
+  user-select: none;
+
+  margin: 4rem 5rem;
+  border-bottom: 4px solid #fd423cab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: whitesmoke;
+    margin: 0px 5px;
+    font-size: 1.5rem;
+  }
+}
+
+#control {
+  background-color: $cardColor;
+  height: 30vh;
+  margin: 0px 3rem;
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  select {
+    font-size: 2.5rem;
+    display: flex;
+    margin: 1rem;
+    font-family: "Prata", serif;
+
+    border: 1px solid whitesmoke;
+    border-radius: 4px;
+    background: none;
+    color: whitesmoke;
+
+    option {
+      color: $cardColor;
+      background: whitesmoke;
+    }
+  }
+}
+
+#scramble {
+  cursor: pointer;
+  user-select: none;
+
+  margin: 4rem 8rem;
+  border-bottom: 2px solid #fd423cab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: whitesmoke;
+    margin: 0px 5px;
+    font-size: 1.2rem;
+  }
+}
+
+#scramble:hover {
+  border-bottom-color: $yellowColor;
+}

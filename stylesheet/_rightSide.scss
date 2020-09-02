@@ -1,0 +1,17 @@
+#right-side {
+  // background-color: rgba(52, 125, 185, 0.123);
+  width: 75vw;
+  height: 100vh;
+  h1 {
+    color: #a1a1a1;
+    text-align: right;
+    padding: 5rem 5rem;
+  }
+}
+
+#chart-container {
+  position: fixed;
+  top: 25vh;
+  left: 10vh;
+  width: 60vw;
+}

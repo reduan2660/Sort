@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorting</title>
+    <link rel="icon" href="image/icon.png" />
+    <link rel="stylesheet" href="stylesheet/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+
+    <script src="script/data.js" defer></script>
+    <script src="script/app.js" defer></script>
+  </head>
+  <body>
+    <!-- Left bar -->
+    <div id="left-side">
+      <div id="intro">
+        <p>Alve Reduan</p>
+        <div id="me-container"></div>
+      </div>
+
+      <div id="start">
+        <div id="start-container">
+          <img src="image/play.svg" class="startSVG" />
+        </div>
+        <p>Start Sorting !</p>
+      </div>
+      <div id="control">
+        <select name="algorithmSelection" id="algorithmSelection">
+          <option value="bubble" selected>Bubble Sort</option>
+          <option value="insertion">Insertion Sort</option>
+        </select>
+        <select name="datasetSelection" id="datasetSelection">
+          <option value="small">Small</option>
+          <option value="regular" selected>Regular</option>
+          <option value="large">Large</option>
+        </select>
+      </div>
+      <div id="scramble">
+        <div id="scramble-container">
+          <img src="image/play.svg" class="scrambleSVG" />
+        </div>
+        <p>Scramble !</p>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div id="right-side">
+      <h1>Source</h1>
+      <div id="chart-container">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+    <!-- Buttons -->
+    <!-- <button id="bubbleBtn">Bubble Sort !</button>
+    <button id="insertionBtn">Insertion Sort !</button>
+    <button id="scrambleBtn">Scramble !</button> -->
+  </body>
+</html>

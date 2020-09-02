@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Prata", serif;
+}
+
+body {
+  background-color: #212529;
+}
+
+#left-side {
+  background-color: #272b2f;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+  width: 25vw;
+}
+
+#intro {
+  min-height: 20vh;
+  border-bottom: 4px solid rgba(196, 196, 196, 0.3);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 3fr 1fr;
+      grid-template-columns: 3fr 1fr;
+}
+
+#intro p {
+  color: whitesmoke;
+  font-size: 2rem;
+  text-align: right;
+  font-family: "Roboto", sans-serif;
+  margin: auto 5px;
+}
+
+#intro #me-container {
+  margin: auto;
+  height: 65px;
+  width: 65px;
+  background-image: url("/image/me.jpg");
+  background-size: cover;
+  border-radius: 50%;
+}
+
+#start {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 4rem 5rem;
+  border-bottom: 4px solid #fd423cab;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#start p {
+  color: whitesmoke;
+  margin: 0px 5px;
+  font-size: 1.5rem;
+}
+
+#control {
+  background-color: #3b4045;
+  height: 30vh;
+  margin: 0px 3rem;
+  border-radius: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#control select {
+  font-size: 2.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem;
+  font-family: "Prata", serif;
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  background: none;
+  color: whitesmoke;
+}
+
+#control select option {
+  color: #3b4045;
+  background: whitesmoke;
+}
+
+#scramble {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 4rem 8rem;
+  border-bottom: 2px solid #fd423cab;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#scramble p {
+  color: whitesmoke;
+  margin: 0px 5px;
+  font-size: 1.2rem;
+}
+
+#scramble:hover {
+  border-bottom-color: #febc2c;
+}
+
+#right-side {
+  width: 75vw;
+  height: 100vh;
+}
+
+#right-side h1 {
+  color: #a1a1a1;
+  text-align: right;
+  padding: 5rem 5rem;
+}
+
+#chart-container {
+  position: fixed;
+  top: 25vh;
+  left: 10vh;
+  width: 60vw;
+}
+/*# sourceMappingURL=style.css.map */
