@@ -6,9 +6,9 @@ const datasetBtn = document.getElementById("datasetSelection");
 // User Input
 let selectedAlgo = "bubble"; // Default
 let selectedDataset = "regular"; // Default
-
+let selectedType = "bar"; // Default
 // Data
-let ara = smallAra; // Default
+let ara = regularAra; // Default
 let size = ara.length;
 let Labels = ara;
 let speedMS = 10;
@@ -21,48 +21,51 @@ colors.fill("rgba(253, 65, 60, 0.8)", 0);
 let flag = false;
 
 // Chart
-let chart = new Chart(ctx, {
-  type: "pie",
+let chart;
+function createChart() {
+  chart = new Chart(ctx, {
+    type: selectedType,
 
-  data: {
-    labels: Labels,
+    data: {
+      labels: Labels,
 
-    datasets: [
-      {
-        label: "Sorting",
-        backgroundColor: colors,
-        data: ara,
+      datasets: [
+        {
+          label: "Sorting",
+          backgroundColor: colors,
+          data: ara,
+        },
+      ],
+    },
+    options: {
+      legend: {
+        display: false,
       },
-    ],
-  },
-  options: {
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            display: true,
+      tooltips: {
+        enabled: false,
+      },
+      scales: {
+        yAxes: [
+          {
+            gridLines: {
+              display: true,
+            },
+            ticks: {
+              display: false,
+            },
           },
-          ticks: {
-            display: false,
+        ],
+        xAxes: [
+          {
+            gridLines: {
+              display: false,
+            },
           },
-        },
-      ],
-      xAxes: [
-        {
-          gridLines: {
-            display: false,
-          },
-        },
-      ],
+        ],
+      },
     },
-  },
-});
+  });
+}
 
 // Delay
 function sleep(ms) {
@@ -70,27 +73,60 @@ function sleep(ms) {
 }
 
 // Update Dataset
+function updateDataset() {
+  // update chart simply doesn't work if type is changed, so gotta destroy existing one
+  chart.destroy();
 
-function updateDataset() {}
+  // Choosing dataset according to user Input
+  selectedDataset = document.getElementById("datasetSelection").value;
+  if (selectedDataset === "regular") {
+    ara = regularAra;
+    speedMS = 10;
+  }
+  if (selectedDataset === "large") {
+    ara = largeAra;
+    speedMS = 1;
+  }
+  if (selectedDataset === "small") {
+    ara = smallAra;
+    speedMS = 100;
+  }
+
+  // adjusting Chart Parameters
+  size = ara.length;
+  Labels = ara;
+  colors = new Array(size);
+  colors.fill("rgba(253, 65, 60, 0.8)", 0);
+
+  // Choosing type before creating(overwriting a new Chart)
+  selectedType = document.getElementById("typeSelection").value;
+
+  // update chart simply doesn't work if type is changed
+  createChart();
+}
 
 // Start Soring -- Done
 function startSorting() {
   flag = true; // Stops Whatever operation is going on
   colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring
-  selectedAlgo = document.getElementById("algorithmSelection").value;
-  selectedDataset = document.getElementById("datasetSelection").value;
 
+  // Get User Input
+  selectedAlgo = document.getElementById("algorithmSelection").value;
+
+  // Update Chart
   updateDataset(selectedDataset);
 
+  // Call Sorting Function according to user Input
   if (selectedAlgo === "bubble") bubbleSort();
   if (selectedAlgo === "insertion") insertionSort();
 }
 
-// Scramble Array -- Done
-
+// Scramble Array
 function scrambleAra() {
   flag = true; // Stops Whatever operation is going on
   colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring of Bar
+
+  // Update the Chart Based on User Input
   updateDataset(selectedDataset);
 
   var currentIndex = ara.length,
@@ -128,7 +164,7 @@ async function bubbleSort() {
         colors[j + 1] = "rgba(254, 188, 44, 1)";
       }
       if (flag) break;
-      chart.update(0);
+      chart.update(speedMS);
       await sleep(speedMS);
 
       // Reset Working Bars' Color
@@ -155,7 +191,7 @@ async function insertionSort() {
       colors[j - 1] = "rgba(254, 188, 44, 1)";
 
       if (flag) break;
-      chart.update(0);
+      chart.update(speedMS);
       await sleep(speedMS);
 
       // Reset Working Bars' Color
@@ -172,3 +208,6 @@ async function insertionSort() {
 scrambleBtn.addEventListener("click", scrambleAra);
 startBtn.addEventListener("click", startSorting);
 // datasetBtn.addEventListener("click", datasetChange);
+
+// onLoad
+createChart();

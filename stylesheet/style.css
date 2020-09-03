@@ -26,7 +26,7 @@ body {
 
 #intro {
   min-height: 20vh;
-  border-bottom: 4px solid rgba(196, 196, 196, 0.3);
+  border-bottom: 2px solid rgba(196, 196, 196, 0.3);
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 3fr 1fr;
@@ -96,10 +96,7 @@ body {
 }
 
 #control select {
-  font-size: 2.5rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  font-size: 2.2rem;
   margin: 1rem;
   font-family: "Prata", serif;
   border: 1px solid whitesmoke;
@@ -109,6 +106,28 @@ body {
 }
 
 #control select option {
+  color: #3b4045;
+  background: whitesmoke;
+}
+
+#control div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0rem 2rem;
+}
+
+#control div select {
+  font-size: 1.6rem;
+  margin: 0.5rem;
+  font-family: "Prata", serif;
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  background: none;
+  color: whitesmoke;
+}
+
+#control div select option {
   color: #3b4045;
   background: whitesmoke;
 }
