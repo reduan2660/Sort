@@ -1,6 +1,7 @@
 const ctx = document.getElementById("myChart").getContext("2d");
 const scrambleBtn = document.getElementById("scramble");
 const startBtn = document.getElementById("start");
+
 const datasetBtn = document.getElementById("datasetSelection");
 
 // User Input
@@ -18,7 +19,13 @@ let colors = new Array(size);
 colors.fill("rgba(253, 65, 60, 0.8)", 0);
 
 // Flag => If true, Stop what is doing, Start the new operation
-let flag = false;
+let flag = true;
+
+// Setting up Audio
+let mute = false;
+let freqMultiplyer = 1;
+let audioContext = new AudioContext();
+let osc = null;
 
 // Chart
 let chart;
@@ -67,6 +74,23 @@ function createChart() {
   });
 }
 
+// Audio Generator/ Controller
+function startOsc(bool) {
+  if (bool === undefined) bool = true;
+
+  if (bool === true) {
+    osc = audioContext.createOscillator();
+    osc.frequency.value = 100;
+
+    osc.start(audioContext.currentTime);
+    osc.connect(audioContext.destination);
+  } else {
+    osc.stop(audioContext.currentTime);
+    osc.disconnect(audioContext.destination);
+    osc = null;
+  }
+}
+
 // Delay
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -82,14 +106,17 @@ function updateDataset() {
   if (selectedDataset === "regular") {
     ara = regularAra;
     speedMS = 10;
+    freqMultiplyer = 1;
   }
   if (selectedDataset === "large") {
     ara = largeAra;
     speedMS = 1;
+    freqMultiplyer = 1;
   }
   if (selectedDataset === "small") {
     ara = smallAra;
     speedMS = 100;
+    freqMultiplyer = 25;
   }
 
   // adjusting Chart Parameters
@@ -107,6 +134,7 @@ function updateDataset() {
 
 // Start Soring -- Done
 function startSorting() {
+  startOsc();
   flag = true; // Stops Whatever operation is going on
   colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring
 
@@ -115,7 +143,13 @@ function startSorting() {
 
   // Update Chart
   updateDataset(selectedDataset);
-
+  // Check User settings for mute here
+  // Hide Button if not Muted
+  if (!mute) {
+    // take a look at logic here later
+    startBtn.children[0].hidden = true;
+    startBtn.children[1].hidden = true;
+  }
   // Call Sorting Function according to user Input
   if (selectedAlgo === "bubble") bubbleSort();
   if (selectedAlgo === "insertion") insertionSort();
@@ -123,6 +157,14 @@ function startSorting() {
 
 // Scramble Array
 function scrambleAra() {
+  // Show Start Button
+
+  startBtn.children[0].hidden = false;
+  startBtn.children[1].hidden = false;
+
+  // Stops Sound
+  console.log(flag);
+  if (!flag) startOsc(false);
   flag = true; // Stops Whatever operation is going on
   colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring of Bar
 
@@ -148,13 +190,17 @@ function scrambleAra() {
   chart.update();
 }
 
-// Bubble Sort -- Done
+// Bubble Sort  -- Done
 
 async function bubbleSort() {
   flag = false;
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size - 1; j++) {
+  let changing;
+  for (let i = 0; i < size; i--) {
+    changing = 0;
+    for (let j = 0; j < size; j++) {
       if (ara[j] > ara[j + 1]) {
+        changing++;
+
         let temp = ara[j];
         ara[j] = ara[j + 1];
         ara[j + 1] = temp;
@@ -163,6 +209,10 @@ async function bubbleSort() {
         colors[j] = "rgba(254, 188, 44, 1)";
         colors[j + 1] = "rgba(254, 188, 44, 1)";
       }
+
+      // Set Sound Freq
+      osc.frequency.value = ara[j] * freqMultiplyer;
+
       if (flag) break;
       chart.update(speedMS);
       await sleep(speedMS);
@@ -170,7 +220,11 @@ async function bubbleSort() {
       // Reset Working Bars' Color
       colors.fill("rgba(253, 65, 60, 0.8)", 0);
     }
+    if (changing === 0) break;
   }
+  //  Stop Sound
+  startOsc(false);
+  flag = true; // Let the world know, that work is Done3
 }
 
 // Insertion Sort -- Done but Coloring may genjam
@@ -186,11 +240,16 @@ async function insertionSort() {
       let temp = ara[j];
       ara[j] = ara[j - 1];
       ara[j - 1] = temp;
+
       // Set Working Bars' Color
       colors[j] = "rgba(254, 188, 44, 1)";
       colors[j - 1] = "rgba(254, 188, 44, 1)";
 
+      // Set Sound Freq
+      osc.frequency.value = ara[j] * freqMultiplyer;
+
       if (flag) break;
+      // Animation
       chart.update(speedMS);
       await sleep(speedMS);
 
@@ -202,6 +261,10 @@ async function insertionSort() {
   }
   // console.log(colors);
   if (!flag) chart.update(0);
+
+  // Stop Sound
+  startOsc(false);
+  flag = true; // Let the world know, that work is Done
 }
 
 // Event Handlers
