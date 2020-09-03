@@ -132,39 +132,37 @@ function updateDataset() {
   createChart();
 }
 
+// Show-Hide Start Button
+function hideButton(bool) {
+  if (bool == undefined) bool = true;
+
+  startBtn.children[0].hidden = bool;
+  startBtn.children[1].hidden = bool;
+}
 // Start Soring -- Done
 function startSorting() {
-  startOsc();
-  flag = true; // Stops Whatever operation is going on
-  colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring
+  if (flag) {
+    startOsc();
+    flag = true; // Stops Whatever operation is going on
+    colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring
 
-  // Get User Input
-  selectedAlgo = document.getElementById("algorithmSelection").value;
+    // Get User Input
+    selectedAlgo = document.getElementById("algorithmSelection").value;
 
-  // Update Chart
-  updateDataset(selectedDataset);
-  // Check User settings for mute here
-  // Hide Button if not Muted
-  if (!mute) {
-    // take a look at logic here later
-    startBtn.children[0].hidden = true;
-    startBtn.children[1].hidden = true;
+    // Update Chart
+    updateDataset(selectedDataset);
+
+    // Call Sorting Function according to user Input
+    if (selectedAlgo === "bubble") bubbleSort();
+    if (selectedAlgo === "insertion") insertionSort();
   }
-  // Call Sorting Function according to user Input
-  if (selectedAlgo === "bubble") bubbleSort();
-  if (selectedAlgo === "insertion") insertionSort();
 }
 
 // Scramble Array
 function scrambleAra() {
-  // Show Start Button
-
-  startBtn.children[0].hidden = false;
-  startBtn.children[1].hidden = false;
-
   // Stops Sound
-  console.log(flag);
   if (!flag) startOsc(false);
+
   flag = true; // Stops Whatever operation is going on
   colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring of Bar
 
