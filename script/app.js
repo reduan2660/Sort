@@ -113,12 +113,13 @@ function updateDataset() {
     speedMS = 1;
     freqMultiplyer = 1;
   }
-  if (selectedDataset === "small") {
+  if (selectedDataset === "smallData") {
     ara = smallAra;
     speedMS = 100;
     freqMultiplyer = 25;
   }
-
+  console.log(selectedDataset, smallAra.length, ara.length);
+  if (smallAra.length > 20) location.reload(); // Handling Error -_-
   // adjusting Chart Parameters
   size = ara.length;
   Labels = ara;
@@ -132,13 +133,6 @@ function updateDataset() {
   createChart();
 }
 
-// Show-Hide Start Button
-function hideButton(bool) {
-  if (bool == undefined) bool = true;
-
-  startBtn.children[0].hidden = bool;
-  startBtn.children[1].hidden = bool;
-}
 // Start Soring -- Done
 function startSorting() {
   if (flag) {
@@ -155,6 +149,7 @@ function startSorting() {
     // Call Sorting Function according to user Input
     if (selectedAlgo === "bubble") bubbleSort();
     if (selectedAlgo === "insertion") insertionSort();
+    if (selectedAlgo === "selection") selectionSort();
   }
 }
 
@@ -167,9 +162,9 @@ function scrambleAra() {
   colors.fill("rgba(253, 65, 60, 0.8)", 0); // Reset Coloring of Bar
 
   // Update the Chart Based on User Input
-  updateDataset(selectedDataset);
+  updateDataset();
 
-  var currentIndex = ara.length,
+  var currentIndex = ara.length - 1,
     temporaryValue,
     randomIndex;
 
@@ -191,7 +186,10 @@ function scrambleAra() {
 // Bubble Sort  -- Done
 
 async function bubbleSort() {
+  // Updating State
   flag = false;
+
+  // Starting Sorting
   let changing;
   for (let i = 0; i < size; i--) {
     changing = 0;
@@ -252,17 +250,65 @@ async function insertionSort() {
       await sleep(speedMS);
 
       // Reset Working Bars' Color
-      colors[j] = "rgba(253, 65, 60, 0.8)";
-      colors[j - 1] = "rgba(253, 65, 60, 0.8)";
-      // colors.fill("rgba(253, 65, 60, 0.8)", 0);
+      colors.fill("rgba(253, 65, 60, 0.8)", 0);
     }
   }
   // console.log(colors);
   if (!flag) chart.update(0);
 
+  // Updating State
   // Stop Sound
   startOsc(false);
   flag = true; // Let the world know, that work is Done
+}
+
+// Selection Sort
+async function selectionSort() {
+  // Updating State
+  flag = false;
+
+  // Staring Sorting
+  let prevMin = 10000,
+    presentMin,
+    minIndex;
+
+  for (let i = 0; i < size - 1; i++) {
+    presentMin = 10000;
+    for (let j = i; j < size; j++) {
+      presentMin = Math.min(presentMin, ara[j]);
+
+      if (presentMin != prevMin) {
+        minIndex = j;
+        prevMin = presentMin;
+      }
+
+      // Set Working Bars' Color
+      colors[j] = "rgba(254, 188, 44, 1)";
+      colors[minIndex] = "rgba(254, 188, 44, 1)";
+
+      // Set Sound Freq
+      osc.frequency.value = ara[j] * freqMultiplyer;
+      if (flag) break;
+      // Animation
+      chart.update(speedMS);
+      await sleep(speedMS);
+
+      // Reset Working Bars' Color
+      colors.fill("rgba(253, 65, 60, 0.8)", 0);
+      // colors[j] = "rgba(253, 65, 60, 0.8)";
+      // colors[minIndex] = "rgba(253, 65, 60, 0.8)";
+    }
+
+    // insert into ara[i] the minimum value and shift upto minIndex of array right
+    let temp = ara[minIndex];
+    for (let j = minIndex; j > i; j--) ara[j] = ara[j - 1];
+    ara[i] = temp;
+  }
+  if (!flag) chart.update(0);
+  // Updating State
+  // Stop Sound
+  startOsc(false);
+  flag = true; // Let the world know that work is Done
 }
 
 // Event Handlers
