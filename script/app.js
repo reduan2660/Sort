@@ -118,8 +118,13 @@ function updateDataset() {
     speedMS = 100;
     freqMultiplyer = 25;
   }
-  console.log(selectedDataset, smallAra.length, ara.length);
-  if (smallAra.length > 20) location.reload(); // Handling Error -_-
+
+  // if (smallAra.length > 20) location.reload(); // Handling Error -_-
+  // Avoiding Error by removing undefined from array (Cause still unknown)
+  ara = ara.filter(function (element) {
+    return element !== undefined;
+  });
+
   // adjusting Chart Parameters
   size = ara.length;
   Labels = ara;
