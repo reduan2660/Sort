@@ -37,7 +37,7 @@
   cursor: pointer;
   user-select: none;
 
-  margin: 4rem 5rem;
+  margin: 4rem 3rem;
   border-bottom: 4px solid #fd423cab;
   display: flex;
   align-items: center;
@@ -50,10 +50,15 @@
   }
 }
 
+#start:hover {
+  border-bottom-color: $yellowColor;
+}
+
 #control {
   background-color: $cardColor;
-  height: 30vh;
-  margin: 0px 3rem;
+
+  height: 25vh;
+  margin: 0px 2rem;
   border-radius: 14px;
 
   display: flex;
@@ -62,7 +67,7 @@
   justify-content: center;
 
   select {
-    font-size: 2.2rem;
+    font-size: calc(0.5rem + 1.5vw);
 
     margin: 1rem;
     font-family: "Prata", serif;
@@ -80,10 +85,11 @@
 
   div {
     display: flex;
+    // flex-direction: column;     Mobile
     margin: 0rem 2rem;
 
     select {
-      font-size: 1.6rem;
+      font-size: calc(0rem + 1.5vw);
 
       margin: 0.5rem;
       font-family: "Prata", serif;
@@ -105,7 +111,7 @@
   cursor: pointer;
   user-select: none;
 
-  margin: 4rem 8rem;
+  margin: 4rem 3rem;
   border-bottom: 2px solid #fd423cab;
   display: flex;
   align-items: center;
@@ -114,7 +120,7 @@
   p {
     color: whitesmoke;
     margin: 0px 5px;
-    font-size: 1.2rem;
+    font-size: calc(0.8rem + 0.8vw);
   }
 }
 

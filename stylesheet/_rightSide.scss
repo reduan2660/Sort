@@ -7,11 +7,14 @@
     text-align: right;
     padding: 5rem 5rem;
   }
+  position: relative;
 }
 
 #chart-container {
-  position: fixed;
-  top: 25vh;
-  left: 10vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   width: 60vw;
 }

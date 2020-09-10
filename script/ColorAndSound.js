@@ -5,8 +5,10 @@ function setBarColors(index1, index2, index3) {
 }
 
 function setSound(index1, index2) {
-  if (index1) osc.frequency.value = ara[index1] * freqMultiplyer;
-  if (index2) osc.frequency.value = ara[index2] * freqMultiplyer;
+  if (!mute) {
+    if (index1) osc.frequency.value = ara[index1] * freqMultiplyer;
+    if (index2) osc.frequency.value = ara[index2] * freqMultiplyer;
+  }
 }
 
 async function removeColor() {

@@ -1,6 +1,7 @@
 const ctx = document.getElementById("myChart").getContext("2d");
 const scrambleBtn = document.getElementById("scramble");
 const startBtn = document.getElementById("start");
+const muteBtn = document.getElementById("muteBtn");
 
 const datasetBtn = document.getElementById("datasetSelection");
 
@@ -73,21 +74,41 @@ function createChart() {
     },
   });
 }
+// Mute Button Handler
+function muteBtnHandler() {
+  // If Already In Operation then Just Lower the Volume
+  if (osc) {
+    if (mute) {
+      // Gain goes up
+    } else {
+      // Gain goes down
+    }
+  } else {
+    if (mute) {
+      mute = false;
+    } else {
+      mute = true;
+    }
+  }
 
+  console.log("Mute ", mute);
+}
 // Audio Generator/ Controller
 function startOsc(bool) {
-  if (bool === undefined) bool = true;
+  if (!mute) {
+    if (bool === undefined) bool = true;
 
-  if (bool === true) {
-    osc = audioContext.createOscillator();
-    osc.frequency.value = 100;
+    if (bool === true) {
+      osc = audioContext.createOscillator();
+      osc.frequency.value = 100;
 
-    osc.start(audioContext.currentTime);
-    osc.connect(audioContext.destination);
-  } else {
-    osc.stop(audioContext.currentTime);
-    osc.disconnect(audioContext.destination);
-    osc = null;
+      osc.start(audioContext.currentTime);
+      osc.connect(audioContext.destination);
+    } else {
+      osc.stop(audioContext.currentTime);
+      osc.disconnect(audioContext.destination);
+      osc = null;
+    }
   }
 }
 
@@ -192,7 +213,7 @@ function scrambleAra() {
 // Event Handlers
 scrambleBtn.addEventListener("click", scrambleAra);
 startBtn.addEventListener("click", startSorting);
-// datasetBtn.addEventListener("click", datasetChange);
+// muteBtn.addEventListener("click", muteBtnHandler);
 
 // onLoad
 createChart();

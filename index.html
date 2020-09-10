@@ -41,16 +41,16 @@
         </select>
         <div>
           <select name="datasetSelection" id="datasetSelection">
-            <option value="smallData" selected>Small</option>
+            <option value="smallData">Small</option>
             <option value="regular" selected>Regular</option>
             <option value="large">Large</option>
           </select>
           <select name="typeSelection" id="typeSelection">
             <option value="bar" selected>Bar</option>
+            <option value="polarArea">Polar</option>
             <option value="line">Line</option>
             <option value="pie">Pie</option>
             <option value="radar">Radar</option>
-            <option value="polarArea">Polar</option>
             <option value="doughnut">doughnut</option>
           </select>
         </div>
@@ -61,6 +61,7 @@
         </div>
         <p>Scramble !</p>
       </div>
+      <button id="muteBtn" hidden>Mute</button>
     </div>
 
     <!-- Chart -->
@@ -70,9 +71,5 @@
         <canvas id="myChart"></canvas>
       </div>
     </div>
-    <!-- Buttons -->
-    <!-- <button id="bubbleBtn">Bubble Sort !</button>
-    <button id="insertionBtn">Insertion Sort !</button>
-    <button id="scrambleBtn">Scramble !</button> -->
   </body>
 </html>

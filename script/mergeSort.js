@@ -12,12 +12,10 @@ function RecursiveMergeSortIseHereRemoveFunctionToUse() {
   //   // Temp Array
   //   let L = [];
   //   let R = [];
-  //   // Copy data to temp arrays
   //   for (i = 0; i < n1; i++) L[i] = ara[l + i];
   //   for (j = 0; j < n2; j++) R[j] = ara[m + 1 + j];
-  //   /* Merge the temp arrays back into ara[l..r]*/
-  //   i = 0; // Initial index of first subarray
-  //   j = 0; // Initial index of second subarray
+  //   i = 0;
+  //   j = 0;
   //   k = l;
   //   while (i < n1 && j < n2) {
   //     if (L[i] <= R[j]) {
@@ -29,24 +27,16 @@ function RecursiveMergeSortIseHereRemoveFunctionToUse() {
   //     }
   //     k++;
   //   }
-  //   // if (flag) return;
-  //   /* Copy the remaining elements of L[], if there
-  //      are any */
   //   while (i < n1) {
   //     ara[k] = L[i];
   //     i++;
   //     k++;
   //   }
-  //   /* Copy the remaining elements of R[], if there
-  //      are any */
   //   while (j < n2) {
   //     ara[k] = R[j];
   //     j++;
   //     k++;
   //   }
-  //   chart.update(speedMS);
-  //   await sleep(speedMS);
-  //   colors.fill("rgba(253, 65, 60, 0.8)", 0);
   // }
   // async function mergeDivide(l, r) {
   //   l = parseInt(l);
@@ -62,11 +52,9 @@ function RecursiveMergeSortIseHereRemoveFunctionToUse() {
   //   // Updating State
   //   flag = false;
   //   await mergeDivide(0, size - 1);
-  //   console.log(ara);
-  //   if (!flag) chart.update(0);
   //   // Updating State
-  //   // Stop Sound
-  //   startOsc(false);
+  //   if (!flag) chart.update(0);
+  //   startOsc(false); // Stop Sound
   //   flag = true; // Let the world know that work is Done
   // }
 }
