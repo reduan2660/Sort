@@ -14,7 +14,7 @@ let ara = regularAra; // Default
 let size = ara.length;
 let Labels = ara;
 let speedMS = 10;
-
+let k = 500;
 // Set Each Bar Color
 let colors = new Array(size);
 colors.fill("rgba(253, 65, 60, 0.8)", 0);
@@ -148,6 +148,11 @@ function updateDataset() {
 
   // adjusting Chart Parameters
   size = ara.length;
+
+  k = ara.reduce(function (a, b) {
+    return Math.max(a, b);
+  });
+  k += 1;
   Labels = ara;
   colors = new Array(size);
   colors.fill("rgba(253, 65, 60, 0.8)", 0);
@@ -177,6 +182,8 @@ function startSorting() {
     if (selectedAlgo === "insertion") insertionSort();
     if (selectedAlgo === "selection") selectionSort();
     if (selectedAlgo === "marge") mergeSort();
+    if (selectedAlgo === "count") countingSort();
+    if (selectedAlgo === "radix") radixSort();
   }
 }
 
@@ -213,7 +220,7 @@ function scrambleAra() {
 // Event Handlers
 scrambleBtn.addEventListener("click", scrambleAra);
 startBtn.addEventListener("click", startSorting);
-// muteBtn.addEventListener("click", muteBtnHandler);
+muteBtn.addEventListener("click", muteBtnHandler);
 
 // onLoad
 createChart();

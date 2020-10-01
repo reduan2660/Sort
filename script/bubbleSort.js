@@ -4,9 +4,9 @@ async function bubbleSort() {
 
   // Starting Sorting
   let changing;
-  for (let i = 0; i < size; i--) {
+  for (let i = 0; i < size; i++) {
     changing = 0;
-    for (let j = 0; j < size; j++) {
+    for (let j = 0; j < size - i; j++) {
       if (ara[j] > ara[j + 1]) {
         changing++;
 
@@ -25,7 +25,18 @@ async function bubbleSort() {
     }
     if (changing === 0) break;
   }
-  //  Stop Sound
-  startOsc(false);
-  flag = true; // Let the world know, that work is Done3
+
+  for (let i = 0; i < size; i++) {
+    // Color and Sound
+    setBarColors(i);
+    setSound(i);
+    if (flag) break;
+    await removeColor();
+    //   --------------   //
+  }
+
+  // Updating State
+  if (!flag) chart.update(0);
+  startOsc(false); // Stop Sound
+  flag = true; // Let the world know, that work is Done
 }
