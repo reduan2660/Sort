@@ -23,7 +23,7 @@ colors.fill("rgba(253, 65, 60, 0.8)", 0);
 let flag = true;
 
 // Setting up Audio
-let mute = false;
+let mute = true;
 let freqMultiplyer = 1;
 let audioContext = new AudioContext();
 let osc = null;
