@@ -1,2 +1,67 @@
 // Desktop Done
 // Mobile design yet to be done
+
+@media screen and (max-width: 850px) {
+  #left-side {
+    background-color: $sideBar;
+
+    position: fixed;
+    right: 0;
+
+    height: 20vh;
+    width: 100vw;
+  }
+
+  #intro {
+    display: none;
+    p {
+      display: none;
+    }
+  }
+
+  #start {
+    margin: 3rem auto;
+    margin-bottom: 1rem;
+  }
+
+  #control {
+    background-color: $sideBar;
+    height: 10vh;
+    width: 100vw;
+    border-radius: 0px;
+
+    margin: 0rem;
+    display: flex;
+    select {
+      margin: 0rem 0rem 1rem 0rem;
+      font-size: calc(0.9rem + 1.5vw);
+    }
+
+    div {
+      margin: 0rem;
+      select {
+        font-size: calc(0.5rem + 1.5vw);
+      }
+    }
+  }
+
+  #scramble {
+    cursor: pointer;
+    margin: 0;
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+
+    transform: translateX(-50%);
+  }
+
+  #right-side {
+    width: 100vw;
+    padding: 0;
+  }
+  #chart-container {
+    // background-color: red;
+    width: 80vw;
+    height: 50vh;
+  }
+}

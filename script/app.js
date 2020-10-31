@@ -2,19 +2,22 @@ const ctx = document.getElementById("myChart").getContext("2d");
 const scrambleBtn = document.getElementById("scramble");
 const startBtn = document.getElementById("start");
 const muteBtn = document.getElementById("muteBtn");
-
 const datasetBtn = document.getElementById("datasetSelection");
 
+const MOBILE_MAXWIDTH = 850;
+let windowWidth = window.visualViewport.width;
 // User Input
 let selectedAlgo = "bubble"; // Default
 let selectedDataset = "regular"; // Default
 let selectedType = "bar"; // Default
+if (windowWidth <= MOBILE_MAXWIDTH) selectedType = "horizontalBar"; // Mobile Default
 // Data
 let ara = regularAra; // Default
 let size = ara.length;
 let Labels = ara;
 let speedMS = 10;
 let k = 500;
+let selectedBorderWidth = 1;
 // Set Each Bar Color
 let colors = new Array(size);
 colors.fill("rgba(253, 65, 60, 0.8)", 0);
@@ -25,7 +28,7 @@ let flag = true;
 // Setting up Audio
 let mute = true;
 let freqMultiplyer = 1;
-let audioContext = new AudioContext();
+// let audioContext = new AudioContext();
 let osc = null;
 
 // Chart
@@ -42,9 +45,11 @@ function createChart() {
           label: "Sorting",
           backgroundColor: colors,
           data: ara,
+          borderWidth: selectedBorderWidth,
         },
       ],
     },
+
     options: {
       legend: {
         display: false,
@@ -123,21 +128,26 @@ function updateDataset() {
   chart.destroy();
 
   // Choosing dataset according to user Input
+  windowWidth = window.visualViewport.width;
+
   selectedDataset = document.getElementById("datasetSelection").value;
   if (selectedDataset === "regular") {
     ara = regularAra;
     speedMS = 10;
     freqMultiplyer = 1;
+    selectedBorderWidth = 1;
   }
   if (selectedDataset === "large") {
     ara = largeAra;
     speedMS = 1;
     freqMultiplyer = 1;
+    selectedBorderWidth = 0;
   }
   if (selectedDataset === "smallData") {
     ara = smallAra;
     speedMS = 100;
     freqMultiplyer = 25;
+    selectedBorderWidth = 1;
   }
 
   // if (smallAra.length > 20) location.reload(); // Handling Error -_-
@@ -159,6 +169,11 @@ function updateDataset() {
 
   // Choosing type before creating(overwriting a new Chart)
   selectedType = document.getElementById("typeSelection").value;
+
+  // Mobile ////////////////////////////////////////////////////////////////////////////
+  if (windowWidth <= MOBILE_MAXWIDTH) {
+    if (selectedType === "bar") selectedType = "horizontalBar";
+  }
 
   // update chart simply doesn't work if type is changed
   createChart();
